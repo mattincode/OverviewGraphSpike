@@ -4,5 +4,6 @@
     <Application.Resources>
         <SolidColorBrush x:Key="GspDarkBlueBrush" Color="#FF1D4D6E" />
         <SolidColorBrush x:Key="SecuritasAccentGreen2Brush" Color="#66659B8D" />
+        <SolidColorBrush x:Key="GspBlackBrush" Color="#FF1D4D6E" />
     </Application.Resources>
 </Application>

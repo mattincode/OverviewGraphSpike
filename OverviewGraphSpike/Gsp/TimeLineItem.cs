@@ -27,10 +27,9 @@ namespace OverviewGraphSpike.Gsp
 
     public static class DummyData
     {
-        public static IEnumerable<TimelineItem> GetDummyData()
+        public static IEnumerable<TimelineItem> GetDummyData(DateTime day)
         {
             var timeline = new List<TimelineItem>();
-            DateTime day = DateTime.Now;
             for (int i = 0; i < 20; i++)
             {
                 var staffingFactor = 100;

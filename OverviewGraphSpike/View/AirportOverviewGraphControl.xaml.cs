@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using OverviewGraphSpike.Gsp;
 using OverviewGraphSpike.ViewModels;
 using Telerik.Charting;
@@ -71,7 +74,6 @@ namespace OverviewGraphSpike.View
             if (item != null)
             {
                 _latestTrackSelectionItem = item; //.DataItem as TimelineItem;
-                item.IsSelected = true;
             }
         }
 
@@ -84,9 +86,41 @@ namespace OverviewGraphSpike.View
                 if (viewmodel == null || timelineItem == null) return;
 
                 viewmodel.SelectedTime = timelineItem.Time;
-
+                DrawLine(_latestTrackSelectionItem);
             }
         }
 
+        private void DrawLine(CategoricalDataPoint point)
+        {
+            if (CustomSelection == null || CustomSelection.Children == null) return;
+            CustomSelection.Children.Clear();
+            var x = _latestTrackSelectionItem.LayoutSlot.X;
+            var y = _latestTrackSelectionItem.LayoutSlot.Y;
+            //var parentY = _latestTrackSelectionItem.Parent.LayoutSlot.Bottom;
+            var circle = new Ellipse()
+            {
+                Width = 10,
+                Height = 10,
+                Fill = new SolidColorBrush(Colors.Blue)
+            };
+            circle.SetValue(Canvas.TopProperty,y-5);
+            circle.SetValue(Canvas.LeftProperty, x-5);
+            var line = new Line
+            {
+                X1 = x,
+                Y1 = y-5,
+                X2 = x,
+                Y2 = y+5,
+                StrokeThickness = 5,
+                Stroke = new SolidColorBrush(Colors.LightGray)
+            };
+            CustomSelection.Children.Add(circle);
+        }
+
+        private void FrameworkElement_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (_latestTrackSelectionItem == null) return;
+            DrawLine(_latestTrackSelectionItem);
+        }
     }
 }

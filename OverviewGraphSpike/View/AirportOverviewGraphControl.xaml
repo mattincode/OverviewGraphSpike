@@ -27,6 +27,7 @@
                                    MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
                                    PanOffset="{Binding Path=PanOffset,
                                                        RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                   SizeChanged="FrameworkElement_OnSizeChanged"
                                    TrackBallInfoStyle="{StaticResource trackBallInfoStyle}"
                                    TrackBallLineStyle="{StaticResource trackBallLineStyle}"
                                    Zoom="{Binding Path=Zoom,
@@ -72,5 +73,8 @@
                 <telerik:LinearAxis LabelFormat="p0" />
             </telerik:RadCartesianChart.VerticalAxis>
         </telerik:RadCartesianChart>
+        <Canvas x:Name="CustomSelection"
+                Background="Transparent"
+                IsHitTestVisible="False" />
     </Grid>
 </UserControl>
