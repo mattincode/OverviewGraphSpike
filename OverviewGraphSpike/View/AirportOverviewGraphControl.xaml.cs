@@ -44,7 +44,22 @@ namespace OverviewGraphSpike.View
         }
         #endregion
 
-        TimelineItem _latestTrackSelectionItem = null; 
+        public Point PanOffset
+        {
+            get { return _panOffset; }
+            set { _panOffset = value;}
+        }
+
+        public Size Zoom
+        {
+            get { return _zoom; }
+            set { _zoom = value; }
+        }
+
+        CategoricalDataPoint _latestTrackSelectionItem = null;
+        private Point _panOffset;
+        private Size _zoom;
+
         public AirportOverviewGraphControl()
         {
             InitializeComponent();
@@ -55,7 +70,8 @@ namespace OverviewGraphSpike.View
             var item = e.Context.ClosestDataPoint.DataPoint as CategoricalDataPoint;
             if (item != null)
             {
-                _latestTrackSelectionItem = item.DataItem as TimelineItem;
+                _latestTrackSelectionItem = item; //.DataItem as TimelineItem;
+                item.IsSelected = true;
             }
         }
 
@@ -64,9 +80,10 @@ namespace OverviewGraphSpike.View
             if (_latestTrackSelectionItem != null)
             {
                 var viewmodel = DataContext as AirportOverviewGraphControlViewModel;
-                if (viewmodel == null) return;
+                var timelineItem = _latestTrackSelectionItem.DataItem as TimelineItem;
+                if (viewmodel == null || timelineItem == null) return;
 
-                viewmodel.SelectedTime =_latestTrackSelectionItem.Time;
+                viewmodel.SelectedTime = timelineItem.Time;
 
             }
         }

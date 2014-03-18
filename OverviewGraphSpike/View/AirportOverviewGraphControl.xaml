@@ -25,9 +25,14 @@
     <Grid x:Name="LayoutRoot" Background="White">
         <telerik:RadCartesianChart MinHeight="100"
                                    MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
+                                   PanOffset="{Binding Path=PanOffset,
+                                                       RelativeSource={RelativeSource AncestorType=UserControl}}"
                                    TrackBallInfoStyle="{StaticResource trackBallInfoStyle}"
-                                   TrackBallLineStyle="{StaticResource trackBallLineStyle}">
+                                   TrackBallLineStyle="{StaticResource trackBallLineStyle}"
+                                   Zoom="{Binding Path=Zoom,
+                                                  RelativeSource={RelativeSource AncestorType=UserControl}}">
             <telerik:RadCartesianChart.Behaviors>
+                <telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" />
                 <telerik:ChartTrackBallBehavior ShowIntersectionPoints="True"
                                                 ShowTrackInfo="True"
                                                 SnapMode="ClosestPoint"
@@ -44,9 +49,15 @@
                                 Stroke="{StaticResource SecuritasAccentGreen2Brush}"
                                 ValueBinding="SchedulingMatch" />
             <telerik:RadCartesianChart.HorizontalAxis>
-                <telerik:DateTimeContinuousAxis LineStroke="#AEAEAE"
+                <telerik:DateTimeContinuousAxis LabelFitMode="Rotate"
+                                                LabelRotationAngle="45"
+                                                LineStroke="#AEAEAE"
                                                 MajorStep="1"
-                                                MajorStepUnit="Week">
+                                                MajorStepUnit="Week"
+                                                Maximum="{Binding Path=TimeRange.End,
+                                                                  RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                Minimum="{Binding Path=TimeRange.Start,
+                                                                  RelativeSource={RelativeSource AncestorType=UserControl}}">
                     <telerik:DateTimeContinuousAxis.LabelTemplate>
                         <DataTemplate>
                             <StackPanel>
