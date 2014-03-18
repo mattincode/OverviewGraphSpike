@@ -1,0 +1,8 @@
+﻿<Application x:Class="OverviewGraphSpike.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <SolidColorBrush x:Key="GspDarkBlueBrush" Color="#FF1D4D6E" />
+        <SolidColorBrush x:Key="SecuritasAccentGreen2Brush" Color="#66659B8D" />
+    </Application.Resources>
+</Application>

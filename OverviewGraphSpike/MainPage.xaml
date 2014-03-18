@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="OverviewGraphSpike.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:view="clr-namespace:OverviewGraphSpike.View"
+             xmlns:viewModels="clr-namespace:OverviewGraphSpike.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels:AirportOverviewGraphControlViewModel}"
+             d:DesignHeight="300"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+    <Grid>
+        <view:AirportOverviewGraphControl SelectedDate="{Binding SelectedTime,
+                                                                 Mode=TwoWay}"
+                                          TimeLineItems="{Binding TimelineItems}"
+                                          TimeRange="{Binding TimeRange}" />
+    </Grid>
+
+</UserControl>
