@@ -2,8 +2,20 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
+        <Color x:Key="GspBlack">Black</Color>
+        <Color x:Key="GspWhite">White</Color>
+        <Color x:Key="GspGreen">#FF8DC03E</Color>
+        <Color x:Key="GspRed">Red</Color>
+
+        <Color x:Key="GspLightBlue">#FFD5E4EE</Color>
+        <Color x:Key="GspMediumBlue">#FF77A8C9</Color>
+        <Color x:Key="GspDarkBlue">#FF1D4D6E</Color>
+        <Color x:Key="SecuritasAccentGreen1">#99659B8D</Color>
+        <Color x:Key="SecuritasAccentGreen2">#66659B8D</Color>
+        <SolidColorBrush x:Key="GspLightBlueBrush" Color="#FFD5E4EE" />
         <SolidColorBrush x:Key="GspDarkBlueBrush" Color="#FF1D4D6E" />
         <SolidColorBrush x:Key="SecuritasAccentGreen2Brush" Color="#66659B8D" />
         <SolidColorBrush x:Key="GspBlackBrush" Color="#FF1D4D6E" />
+        <SolidColorBrush x:Key="GspRedBrush" Color="Red" />
     </Application.Resources>
 </Application>

@@ -36,7 +36,7 @@ namespace OverviewGraphSpike.View
             }
         }
 
-        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register("SelectedDate", typeof(DateTime), typeof(UserControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register("SelectedDate", typeof(DateTime), typeof(UserControl), new PropertyMetadata(new PropertyChangedCallback(OnSelectedDateChanged)));
         public DateTime SelectedDate
         {
             get { return (DateTime)GetValue(SelectedDateProperty); }
@@ -47,21 +47,18 @@ namespace OverviewGraphSpike.View
         }
         #endregion
 
-        public Point PanOffset
-        {
-            get { return _panOffset; }
-            set { _panOffset = value;}
-        }
-
-        public Size Zoom
-        {
-            get { return _zoom; }
-            set { _zoom = value; }
-        }
-
+        public Point PanOffset { get; set; }
+        public Size Zoom { get; set; }
         CategoricalDataPoint _latestTrackSelectionItem = null;
-        private Point _panOffset;
-        private Size _zoom;
+
+        private static void OnSelectedDateChanged(DependencyObject sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            // Select the value that is 
+            var newSelectedDate = (DateTime)dependencyPropertyChangedEventArgs.NewValue;
+            var control = sender as AirportOverviewGraphControl;
+            if (control != null)
+                control.TimeLineItems.UpdateSelectedDay(newSelectedDate, DummyData.GetBrush(DummyData.BrushTypeEnum.TimelineSelectedStaffingDayBrush), DummyData.GetBrush(DummyData.BrushTypeEnum.TimelineNormalStaffingDayBrush), DummyData.GetBrush(DummyData.BrushTypeEnum.TimelineSelectedSchedulingDayBrush), DummyData.GetBrush(DummyData.BrushTypeEnum.TimelineNormalSchedulingDayBrush));            
+        }        
 
         public AirportOverviewGraphControl()
         {
@@ -73,54 +70,21 @@ namespace OverviewGraphSpike.View
             var item = e.Context.ClosestDataPoint.DataPoint as CategoricalDataPoint;
             if (item != null)
             {
-                _latestTrackSelectionItem = item; //.DataItem as TimelineItem;
+                // Save tracked item
+                _latestTrackSelectionItem = item;
             }
         }
 
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        {            
             if (_latestTrackSelectionItem != null)
             {
-                var viewmodel = DataContext as AirportOverviewGraphControlViewModel;
                 var timelineItem = _latestTrackSelectionItem.DataItem as TimelineItem;
-                if (viewmodel == null || timelineItem == null) return;
+                if (timelineItem == null) return;
 
-                viewmodel.SelectedTime = timelineItem.Time;
-                DrawLine(_latestTrackSelectionItem);
+                // Set selected date to the clicked element
+                SelectedDate = timelineItem.Time;
             }
-        }
-
-        private void DrawLine(CategoricalDataPoint point)
-        {
-            if (CustomSelection == null || CustomSelection.Children == null) return;
-            CustomSelection.Children.Clear();
-            var x = _latestTrackSelectionItem.LayoutSlot.X;
-            var y = _latestTrackSelectionItem.LayoutSlot.Y;
-            //var parentY = _latestTrackSelectionItem.Parent.LayoutSlot.Bottom;
-            var circle = new Ellipse()
-            {
-                Width = 10,
-                Height = 10,
-                Fill = new SolidColorBrush(Colors.Blue)
-            };
-            circle.SetValue(Canvas.TopProperty,y-5);
-            circle.SetValue(Canvas.LeftProperty, x-5);
-            var line = new Line
-            {
-                X1 = x,
-                Y1 = y-5,
-                X2 = x,
-                Y2 = y+5,
-                StrokeThickness = 5,
-                Stroke = new SolidColorBrush(Colors.LightGray)
-            };
-            CustomSelection.Children.Add(circle);
-        }
-
-        private void FrameworkElement_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (_latestTrackSelectionItem == null) return;
-            DrawLine(_latestTrackSelectionItem);
         }
     }
 }

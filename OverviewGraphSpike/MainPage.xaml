@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:view="clr-namespace:OverviewGraphSpike.View"
              xmlns:viewModels="clr-namespace:OverviewGraphSpike.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewModels:AirportOverviewGraphControlViewModel}"
@@ -10,7 +11,13 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
     <Grid>
-        <view:AirportOverviewGraphControl SelectedDate="{Binding SelectedTime,
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <telerik:RadDateTimePicker SelectedDate="{Binding SelectedTime, Mode=TwoWay}" />
+        <view:AirportOverviewGraphControl Grid.Row="1"
+                                          SelectedDate="{Binding SelectedTime,
                                                                  Mode=TwoWay}"
                                           TimeLineItems="{Binding TimelineItems}"
                                           TimeRange="{Binding TimeRange}" />

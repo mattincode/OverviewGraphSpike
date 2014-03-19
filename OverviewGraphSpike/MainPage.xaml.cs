@@ -15,7 +15,7 @@ namespace OverviewGraphSpike
             var startDate = new DateTime(2001, 1, 1, 00, 00, 00);
             _vm.SelectedTime = startDate;
             _vm.TimeRange = new DateTimeRange(startDate, startDate.AddMonths(6));
-            _vm.TimelineItems = new ObservableCollection<TimelineItem>(DummyData.GetDummyData(startDate));
+            _vm.TimelineItems = new ObservableCollection<TimelineItem>(DummyData.GetDummyData(startDate, startDate));
             DataContext = _vm;
         }
     }
