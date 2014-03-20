@@ -16,7 +16,7 @@
                                               FalseValue="Collapsed"
                                               TrueValue="Visible" />
         <Style x:Key="trackBallLineStyle" TargetType="Polyline">
-            <Setter Property="Visibility" Value="Collapsed" />
+            <Setter Property="Visibility" Value="Visible" />
         </Style>
         <Style x:Key="trackBallInfoStyle" TargetType="telerik:TrackBallInfoControl">
             <Setter Property="Template">
@@ -29,11 +29,15 @@
     <Grid x:Name="LayoutRoot" Background="White">
         <telerik:RadCartesianChart x:Name="ChartView"
                                    MinHeight="100"
+                                   FontSize="9"
                                    MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
                                    PanOffset="{Binding Path=PanOffset,
                                                        RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                   TrackBallInfoStyle="{StaticResource trackBallInfoStyle}"
+                                   TrackBallLineStyle="{StaticResource trackBallLineStyle}"
                                    Zoom="{Binding Path=Zoom,
                                                   RelativeSource={RelativeSource AncestorType=UserControl}}">
+
             <telerik:RadCartesianChart.Behaviors>
                 <telerik:ChartPanAndZoomBehavior ZoomMode="Horizontal" />
                 <telerik:ChartTrackBallBehavior ShowIntersectionPoints="True"
@@ -51,7 +55,7 @@
                         <Canvas>
                             <TextBlock Canvas.Left="-30"
                                        Canvas.Top="-20"
-                                       Text="{Binding DataItem.DateString}"
+                                       Text="{Binding DataItem.DateStringStaffing}"
                                        TextAlignment="Center"
                                        Visibility="{Binding Path=DataItem.IsSelected,
                                                             Converter={StaticResource BoolToVisibilityConverter}}" />
@@ -75,7 +79,7 @@
                         <Canvas>
                             <TextBlock Canvas.Left="-30"
                                        Canvas.Top="-20"
-                                       Text="{Binding DataItem.DateString}"
+                                       Text="{Binding DataItem.DateStringScheduling}"
                                        TextAlignment="Center"
                                        Visibility="{Binding Path=DataItem.IsSelected,
                                                             Converter={StaticResource BoolToVisibilityConverter}}" />
@@ -90,7 +94,7 @@
             </telerik:LineSeries>
             <telerik:RadCartesianChart.HorizontalAxis>
                 <telerik:DateTimeContinuousAxis LabelFitMode="Rotate"
-                                                LabelRotationAngle="45"
+                                                LabelRotationAngle="-45"
                                                 LineStroke="#AEAEAE"
                                                 MajorStep="1"
                                                 MajorStepUnit="Week"

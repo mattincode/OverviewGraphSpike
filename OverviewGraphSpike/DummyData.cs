@@ -39,7 +39,7 @@ namespace OverviewGraphSpike
 
                 staffingFactor = rnd.Next(0, 100);
                 schedulingMatch = rnd.Next(20, 120);
-                timeline.Add(new TimelineItem() { Time = day, StaffingFactor = staffingFactor, SchedulingMatch = schedulingMatch, StaffingNeedMin = 0, StaffingNeedMax = 100, StaffingNeedAvg = 50, StaffingColor = staffingColor, SchedulingMatchColor = schedulingColor});
+                timeline.Add(new TimelineItem() { Time = day, StaffingFactor = staffingFactor/100, SchedulingMatch = schedulingMatch/100, StaffingNeedMin = 0, StaffingNeedMax = 100, StaffingNeedAvg = 50, StaffingColor = staffingColor, SchedulingMatchColor = schedulingColor});
                 
                 day = day.AddDays(1);
             }

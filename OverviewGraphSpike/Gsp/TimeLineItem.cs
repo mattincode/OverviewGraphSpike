@@ -27,13 +27,20 @@ namespace OverviewGraphSpike.Gsp
             }
         }
 
-        public string DateString
+        public string DateStringStaffing
         {
             get
             {
-                return Time.ToShortDateString();
+                return String.Format("({0}%) {1}", (StaffingFactor*100).ToString("0.#"), Time.ToShortDateString()) ;
             }
-            set { _dateString = value; RaisePropertyChanged(() => DateString); }
+        }
+
+        public string DateStringScheduling
+        {
+            get
+            {
+                return String.Format("({0}%) {1}", SchedulingMatch*100, Time.ToShortDateString());
+            }
         }
 
         public Brush StaffingColor

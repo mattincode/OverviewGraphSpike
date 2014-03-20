@@ -9,6 +9,8 @@ namespace OverviewGraphSpike.ViewModels
         private DateTimeRange _timeRange;
         private DateTime _selectedTime;
         private ObservableCollection<TimelineItem> _timelineItems;
+        private TimelineItem _selectedTimeLineItem;
+        private double _testValue = 8.9002;
 
         public DateTimeRange TimeRange
         {
@@ -28,12 +30,16 @@ namespace OverviewGraphSpike.ViewModels
             set { _timelineItems = value; RaisePropertyChanged(() => TimelineItems);}
         }
 
-        //public IActionCommand SelectTimeCommand { get; private set; }
+        public TimelineItem SelectedTimeLineItem
+        {
+            get { return _selectedTimeLineItem; }
+            set { _selectedTimeLineItem = value; RaisePropertyChanged(() => SelectedTimeLineItem); }
+        }
 
-        //public AirportOverviewGraphControlViewModel()
-        //{
-        //    NavigateBackCommand = new ActionCommand<object>(OnNavigateBack, null);
-
-        //}
+        public double TestValue
+        {
+            get { return _testValue; }
+            set { _testValue = value; RaisePropertyChanged(() => TestValue); }
+        }        
     }
 }

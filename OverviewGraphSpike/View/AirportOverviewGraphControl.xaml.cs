@@ -45,6 +45,16 @@ namespace OverviewGraphSpike.View
                 SetValue(SelectedDateProperty, value);
             }
         }
+
+        public static readonly DependencyProperty SelectedTimeLineItemProperty = DependencyProperty.Register("SelectedTimeLineItem", typeof(TimelineItem), typeof(UserControl), new PropertyMetadata(null));
+        public TimelineItem SelectedTimeLineItem
+        {
+            get { return (TimelineItem)GetValue(SelectedTimeLineItemProperty); }
+            set
+            {
+                SetValue(SelectedTimeLineItemProperty, value);
+            }
+        }
         #endregion
 
         public Point PanOffset { get; set; }
@@ -84,6 +94,7 @@ namespace OverviewGraphSpike.View
 
                 // Set selected date to the clicked element
                 SelectedDate = timelineItem.Time;
+                SelectedTimeLineItem = timelineItem;
             }
         }
     }
